@@ -1,0 +1,9 @@
+{
+	"name": "df-ownspotify",
+	"location": "northeurope",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "c4b0f367-02f1-4467-a43a-fd204f12b28b",
+		"tenantId": "5f526d2b-7af6-4f9a-ad66-a94e6dfa1508"
+	}
+}
