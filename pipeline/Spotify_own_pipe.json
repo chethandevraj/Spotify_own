@@ -31,7 +31,7 @@
 					"source": {
 						"type": "AzureSqlSource",
 						"sqlReaderQuery": {
-							"value": "SELECT * FROM @{pipeline().parameters.schema}.@{pipeline().parameters.table} WHERE @{pipeline().parameters.col_name}> @{activity('last_cdc').output.value[0].cdc}",
+							"value": "SELECT * FROM @{pipeline().parameters.schema}.@{pipeline().parameters.table} WHERE @{pipeline().parameters.col_name}> '@{if(empty(pipeline().parameters.from_date),activity('last_cdc').output.value[0].cdc,pipeline().parameters.from_date)}'",
 							"type": "Expression"
 						},
 						"queryTimeout": "02:00:00",
@@ -147,7 +147,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"expression": {
-						"value": "@greater(activity('Copy data1').output,0)",
+						"value": "@greater(activity('Copy data1').output.dataRead,0)",
 						"type": "Expression"
 					},
 					"ifFalseActivities": [
@@ -304,6 +304,9 @@
 				"type": "string"
 			},
 			"col_name": {
+				"type": "string"
+			},
+			"from_date": {
 				"type": "string"
 			}
 		},
